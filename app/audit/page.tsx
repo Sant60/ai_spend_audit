@@ -2,11 +2,9 @@ import SpendForm from "@/components/forms/SpendForm";
 
 const AuditPage = () => {
   return (
-    <div className="max-w-2xl mx-auto p-6">
-      <h1 className="text-4xl font-bold mb-6">AI Spend Audit</h1>
-
+    <main className="mx-auto flex w-full max-w-4xl flex-1 flex-col px-4 py-10 sm:px-6">
       <SpendForm />
-    </div>
+    </main>
   );
 };
 
