@@ -1,34 +1,40 @@
-# Architecture Notes
+# Project Structure and Workflow
 
-## Why this structure
+## Organizational Rationale
 
-I kept the project close to the assignment guidance:
+The project's organization closely follows the assignment requirements:
 
-- `app/` for pages and API routes
-- `components/` for form, result, and shared UI pieces
-- `lib/` for audit logic, AI helper, database helper, and utilities
-- `types/` for shared TypeScript interfaces
-- `constants/` for tool and plan definitions
-- `tests/` for a few important business-rule tests
+- **`app/`**: Contains the application pages and API endpoints.
+- **`components/`**: Stores reusable UI components like forms, result cards, and shared layouts.
+- **`lib/`**: Includes the core logic such as audit functions, AI integration, database setup, and utility helpers.
+- **`types/`**: Defines shared TypeScript interfaces used across the app.
+- **`constants/`**: Stores tool names and pricing related constants.
+- **`tests/`**: Contains tests for important business logic and calculations.
 
-## Data flow
+## Operational Flow
 
-1. The user visits `/audit` and fills the form.
-2. The form state is saved in `localStorage` while typing.
-3. On submit, the client sends the form payload to `POST /api/audits`.
-4. The server runs deterministic audit logic in `lib/audit/`.
-5. The server generates a short AI summary using Anthropic.
-6. The full audit result is saved to Supabase if keys are configured.
-7. The client stores the returned result in `localStorage` and navigates to `/result/[id]`.
-8. The result page loads the audit from Supabase when possible, and falls back to `localStorage` if needed.
-9. A lead form on the result page sends contact info to `POST /api/leads`.
+1. A user opens the `/audit` page and fills out the form.
+2. While typing, the form state is stored in `localStorage`.
+3. After submission, the client sends the form data to the `POST /api/audits` endpoint.
+4. The server runs the deterministic audit logic located inside `lib/audit/`.
+5. Anthropic is then used to generate a short summary of the audit findings.
+6. If Supabase credentials are available, the audit results are stored in the database.
+7. The client stores the latest result in `localStorage` and redirects the user to `/result/[id]`.
+8. The result page first tries to load audit data from Supabase. If unavailable, it falls back to `localStorage`.
+9. A lead capture form on the result page sends user information to `POST /api/leads`.
 
-## Audit engine design
+## Audit Logic Design
 
-The most important requirement was that the core business logic stay readable and defensible.
+One of the main goals during developement was to keep the business logic predictable and easy to understand.
 
-- `calculateSavings()` only computes cost difference and never goes negative.
-- `detectOverspend()` looks for plain-language waste patterns, such as oversized collaboration plans and unused seats.
-- `recommendPlan()` compares a small number of sensible plan candidates and picks the one with the best savings.
-- `generateAudit()` combines the output into one result object used by the UI and persistence layer.
+- **`calculateSavings()`**: Calculates the difference between the current spend and the recommended spend while making sure the value never becomes negative.
+- **`detectOverspend()`**: Detects common waste patterns such as oversized plans or unused seats.
+- **`recommendPlan()`**: Compares a limited set of plans and reccomends the most cost-effective option.
+- **`generateAudit()`**: Combines all outputs into a single audit result object used by both the UI and persistance layer.
 
+## Notes
+
+- Audit calculations are intentionally rule-based instead of AI-generated.
+- AI is only used for generating personalized summaries.
+- Most business logic is seperated inside `lib/audit/` to make debugging and maintainance easier.
+- `localStorage` is used to improve the user experiance during refreshes or local development.

@@ -1,49 +1,73 @@
-# 7-Day Devlog
+# Development Timeline
 
 ## Day 1
 
-- Read the assignment brief and narrowed the MVP scope.
-- Decided to focus on one clear audit flow instead of a broad dashboard.
-- Set up the Next.js App Router project structure.
+I started by reviewing the assignment requirements and identifying the main features needed for the MVP. Instead of building a large dashboard system, I decided to focus more on a simple and practical audit flow.
+
+I also initialized the project using Next.js App Router and started setting up the base folder structure.
+
+---
 
 ## Day 2
 
-- Sketched the core form fields and result page sections.
-- Listed the AI tools and pricing assumptions I wanted to support.
-- Decided the audit logic should be deterministic and not AI-driven.
+I worked on planning the form flow and the results page structure. I also created an initial list of AI tools and pricing plans that would be used inside the audit logic.
+
+One important decision during this phase was keeping the audit logic deterministic instead of AI-generated so the recommendations remain predictable and easier to verify.
+
+---
 
 ## Day 3
 
-- Built the first version of the landing page and audit form.
-- Added `localStorage` draft persistence so the form feels less fragile.
-- Realized I needed better shared types before going further.
+I built the first version of the landing page and audit form. I also implemented `localStorage` support so users do not lose progress after refreshing the page.
+
+During this phase, I realized the project needed better shared type definitions before adding more features.
+
+---
 
 ## Day 4
 
-- Implemented `calculateSavings`, `detectOverspend`, `recommendPlan`, and `generateAudit`.
-- Reworked the recommendation logic so it reads like business reasoning instead of clever code.
-- Added initial test coverage for the core utility functions.
+I started building the core audit utility functions:
+
+- `calculateSavings()`
+- `detectOverspend()`
+- `recommendPlan()`
+- `generateAudit()`
+
+I adjusted the recommendation logic multiple times so the suggestions sounded more practical and less like overly complex enterprise logic.
+
+I also added some initial tests for the main audit functions.
+
+---
 
 ## Day 5
 
-- Added API routes for creating audits and capturing leads.
-- Connected Supabase for simple storage of audits and leads.
-- Added a result route with a shareable URL structure.
+I created the API routes for generating audits and storing leads. I integrated Supabase for storing audit results and lead data.
+
+I also created the initial structure for the results page and added support for shareable URLs using dynamic routes.
+
+---
 
 ## Day 6
 
-- Integrated Anthropic for a short summary paragraph.
-- Added a fallback summary so the app still works without the API.
-- Cleaned up the result UI to be more presentation-friendly.
+I integrated the Anthropic API to generate short personalized summaries for the audit results.
+
+To avoid breaking the app when API access is unavailable, I also implemented a fallback summary system.
+
+I spent some additional time improving the UI and spacing of the results page.
+
+---
 
 ## Day 7
 
-- Replaced boilerplate docs with project-specific documentation.
-- Reviewed the code for readability and beginner explainability.
-- Ran tests, linting, and a production build pass.
+I replaced placeholder documentation with project-specific documentation and reviewed the codebase to make the structure easier to understand.
 
-## Biggest blockers
+Finally, I ran tests, lint checks, and a final production build before deployment.
 
-- Balancing product polish with the “student-built in 7 days” constraint.
-- Making the shareable result flow still work during local development without relying fully on Supabase.
-- Keeping the recommendation logic useful without turning it into a fake enterprise rules engine.
+---
+
+# Challenges Faced
+
+- Finding the right balance between a polished product and the limitations of a 7-day timeline.
+- Making the shareable results flow work properly during local development without depending completely on Supabase.
+- Keeping the recommendation logic useful without making it unnecessarily complicated.
+- Managing the project structure while learning new parts of the stack during development.
