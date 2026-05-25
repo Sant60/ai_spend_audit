@@ -7,7 +7,7 @@ const RecommendationCard = ({
   recommendation: AuditRecommendation;
 }) => {
   return (
-    <div className="border border-black bg-white p-5">
+    <div className=" bg-white p-5">
       <div className="mb-3 flex items-center justify-between gap-4">
         <div>
           <p className="text-xs font-bold uppercase tracking-[0.18em] text-[#112a5c]">
@@ -25,9 +25,7 @@ const RecommendationCard = ({
         </div>
       </div>
 
-      <p className="text-sm leading-6 text-black">
-        {recommendation.reason}
-      </p>
+      <p className="text-sm leading-6 text-black">{recommendation.reason}</p>
     </div>
   );
 };

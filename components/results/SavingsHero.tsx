@@ -14,10 +14,10 @@ const SavingsHero = ({
   overspend,
 }: SavingsHeroProps) => {
   return (
-    <section className="border-1 border-black bg-white p-6 sm:p-8">
+    <section className=" bg-white p-6 sm:p-8">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
         <div className="space-y-3">
-          <span className="inline-flex border border-black bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#112a5c]">
+          <span className="inline-flex bg-white px-3 py-1 text-xs font-bold uppercase tracking-wide text-[#112a5c]">
             {overspend ? "Savings found" : "Looks fine"}
           </span>
           <div className="space-y-2">
@@ -31,7 +31,7 @@ const SavingsHero = ({
           </div>
         </div>
 
-        <div className="border border-black bg-[#112a5c] px-5 py-4 text-left text-white sm:text-right">
+        <div className=" bg-[#112a5c] px-5 py-4 text-left text-white sm:text-right">
           <p className="text-sm font-bold uppercase tracking-wide">
             Annual savings
           </p>
@@ -52,7 +52,7 @@ const SavingsHero = ({
             {formatCurrency(monthlySavings)}
           </p>
         </div>
-        <div className="border border-black bg-white p-5">
+        <div className="border border-black bg-white p-5 ">
           <p className="text-sm text-black">Estimated annual savings</p>
           <p className="mt-2 text-2xl font-bold text-black">
             {formatCurrency(annualSavings)}

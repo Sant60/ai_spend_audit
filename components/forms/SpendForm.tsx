@@ -115,9 +115,11 @@ const SpendForm = () => {
   }
 
   return (
-    <div className="border-1 border-black bg-white p-6 sm:p-8">
+    <div className="shadow inset-shadow-sm inset-shadow-black bg-white p-6 sm:p-8">
       <div className="mb-8 space-y-2">
-        <h2 className="text-2xl font-bold text-black">Enter your current setup</h2>
+        <h2 className="text-2xl font-bold text-black">
+          Enter your current setup
+        </h2>
         <p className="text-sm leading-6 text-black">
           One tool is enough. We&apos;ll flag overpriced plans, extra seats, and
           easy savings.
@@ -187,9 +189,7 @@ const SpendForm = () => {
           </label>
 
           <label className="flex flex-col gap-2">
-            <span className="text-sm font-bold text-black">
-              Main use case
-            </span>
+            <span className="text-sm font-bold text-black">Main use case</span>
             <select
               value={formData.useCase}
               onChange={(event) =>
