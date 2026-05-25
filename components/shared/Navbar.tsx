@@ -2,10 +2,16 @@ import Link from "next/link";
 
 const Navbar = () => {
   return (
-    <nav className="flex justify-between items-center p-4 border-b">
-      <h1 className="text-xl font-bold">AI Audit</h1>
+    <nav className="border-b-2 border-black bg-white">
+      <div className="mx-auto flex w-full max-w-6xl items-center justify-between px-4 py-4 sm:px-6">
+        <Link href="/" className="text-xl font-bold text-black">
+          AI Spend Audit
+        </Link>
 
-      <Link href="/audit">Start Audit</Link>
+        <Link href="/audit" className=" text-sm font-bold text-white ">
+          Start Audit
+        </Link>
+      </div>
     </nav>
   );
 };
