@@ -1,17 +1,9 @@
-export const pricing = {
-  chatgpt: {
-    plus: 20,
-    team: 30,
-    enterprise: 60,
-  },
+import { TOOL_OPTIONS } from "@/constants/tools";
 
-  claude: {
-    pro: 20,
-    max: 100,
-  },
+export function findToolById(toolId: string) {
+  return TOOL_OPTIONS.find((tool) => tool.id === toolId);
+}
 
-  cursor: {
-    pro: 20,
-    business: 40,
-  },
-};
+export function findPlanById(toolId: string, planId: string) {
+  return findToolById(toolId)?.plans.find((plan) => plan.id === planId);
+}
