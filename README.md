@@ -93,23 +93,30 @@ Captures information from users interested in the service, including:
 
 ## Landing page
 
-<img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/9dea971c-c690-4323-867c-3b1f410d8134" />
+<img width="1971" height="1360" alt="image" src="https://github.com/user-attachments/assets/a5839847-0a91-4503-8fa5-9eb9062c7787" />
+
 
 ## Audit form
 
-<img width="1971" height="1139" alt="image" src="https://github.com/user-attachments/assets/016a73ba-4e76-4921-b599-04ebce3b852d" />
+<img width="1971" height="1139" alt="image" src="https://github.com/user-attachments/assets/c3d2ad4a-9a84-450a-ad25-ef361ebcd9b6" />
+
 
 ## Audit results page
 
-  <img width="1971" height="1772" alt="image" src="https://github.com/user-attachments/assets/ad1feff9-a7cf-4cd3-b4df-08420acb4a40" />
+ <img width="1971" height="1692" alt="image" src="https://github.com/user-attachments/assets/a97458e6-2464-404e-9b42-9c2259bf1db7" />
+
 
 ## Recommendation section
 
-  <img width="993" height="380" alt="image" src="https://github.com/user-attachments/assets/666b106f-0618-4419-af03-1b55fc9b21fc" />
+ <img width="978" height="336" alt="image" src="https://github.com/user-attachments/assets/6d9b622f-fe01-4001-b21a-0ef904219d30" />
+
+
 
 ## Lead capture process
 
-<img width="635" height="555" alt="image" src="https://github.com/user-attachments/assets/68703fab-ca96-4d91-a317-16dc6a82a65a" />
+<img width="633" height="595" alt="image" src="https://github.com/user-attachments/assets/2cb09608-1a9a-47eb-9df6-52c8c30eda31" />
+
+
 
 ## Related Documentation
 
