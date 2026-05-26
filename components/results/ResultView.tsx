@@ -78,9 +78,22 @@ const ResultView = ({ auditId }: ResultViewProps) => {
     if (!audit) {
       return;
     }
+    await fetch("/api/send-email", {
+      method: "POST",
 
-    setLeadStatus("");
-    setIsSubmittingLead(true);
+      headers: {
+        "Content-Type": "application/json",
+      },
+
+      body: JSON.stringify({
+        email: leadForm.email,
+        name: leadForm.name,
+        audit,
+      }),
+    });
+
+    setLeadStatus("Report sent to your email.");
+    setLeadForm(defaultLeadState);
 
     try {
       const response = await fetch("/api/leads", {
@@ -103,7 +116,7 @@ const ResultView = ({ auditId }: ResultViewProps) => {
         throw new Error(data.error ?? "Couldn't save that right now.");
       }
 
-      setLeadStatus("Saved. We'll send it over.");
+      setLeadStatus("Report sent to your email.");
       setLeadForm(defaultLeadState);
     } catch (submitError) {
       setLeadStatus(
@@ -154,16 +167,13 @@ const ResultView = ({ auditId }: ResultViewProps) => {
 
       <div className="grid gap-6 lg:grid-cols-[1.4fr_0.9fr]">
         <div className="grid gap-6">
-          <AuditCard
-            title="Recommendation"
-            subtitle="The clearest way to cut cost without changing how the team works."
-          >
+          <AuditCard title="Recommendation" subtitle="">
             <RecommendationCard recommendation={audit.recommendation} />
           </AuditCard>
 
           <AuditCard
-            title="What looks off"
-            subtitle="A few plain-English checks based on plan, seats, and spend."
+            title="Conclusion"
+            subtitle="Based on plan, seats, and spend."
           >
             {audit.findings.length > 0 ? (
               <div className="grid gap-4">
@@ -186,13 +196,13 @@ const ResultView = ({ auditId }: ResultViewProps) => {
               </div>
             ) : (
               <p className="text-sm leading-6 text-black">
-                Nothing stands out as a big waste here. The current plan is
-                pretty close to what this team likely needs.
+                Your plan is good according to your needs and team size, and
+                their is no waste of money.
               </p>
             )}
           </AuditCard>
 
-          <AuditCard title="Summary" subtitle="A quick read on the overall setup.">
+          <AuditCard title="Summary" subtitle="On the overall setup.">
             <p className="text-sm leading-7 text-black">{audit.summary}</p>
           </AuditCard>
         </div>
@@ -232,8 +242,8 @@ const ResultView = ({ auditId }: ResultViewProps) => {
           </AuditCard>
 
           <AuditCard
-            title="Want a deeper review?"
-            subtitle="Leave your details and we'll send this report over."
+            title="Want a more detailed review?"
+            subtitle="Fill in your details, and we’ll send the report to you shortly."
           >
             <form className="grid gap-4" onSubmit={handleLeadSubmit}>
               <input
@@ -243,7 +253,7 @@ const ResultView = ({ auditId }: ResultViewProps) => {
                   updateLeadField("name", event.target.value)
                 }
                 placeholder="Full name"
-                className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+                className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
               />
               <input
                 type="email"
@@ -252,7 +262,7 @@ const ResultView = ({ auditId }: ResultViewProps) => {
                   updateLeadField("email", event.target.value)
                 }
                 placeholder="Email"
-                className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+                className=" shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
               />
               <input
                 type="text"
@@ -261,19 +271,25 @@ const ResultView = ({ auditId }: ResultViewProps) => {
                   updateLeadField("company", event.target.value)
                 }
                 placeholder="Company"
-                className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+                className=" shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
               />
               <button
                 type="submit"
                 disabled={isSubmittingLead}
                 className="border border-black bg-[#112a5c] px-5 py-3 text-sm font-bold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:bg-[#112a5c]"
               >
-                {isSubmittingLead
-                  ? "Sending..."
-                  : "Save My Report"}
+                {isSubmittingLead ? "Sending..." : "Save My Report"}
               </button>
               {leadStatus ? (
-                <p className="text-sm leading-6 text-black">{leadStatus}</p>
+                <p
+                  className={`text-sm leading-6 ${
+                    leadStatus.includes("sent")
+                      ? "text-green-600"
+                      : "text-red-600"
+                  }`}
+                >
+                  {leadStatus}
+                </p>
               ) : null}
             </form>
           </AuditCard>

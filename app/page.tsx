@@ -3,7 +3,7 @@ import Link from "next/link";
 export default function Home() {
   return (
     <main className="mx-auto w-full max-w-6xl px-4 py-16 sm:px-6">
-      <section className="grid gap-12 shadow inset-shadow-sm inset-shadow-black bg-white px-6 py-12 sm:px-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+      <section className="grid gap-12   px-6 py-12 sm:px-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
         {/* LEFT SECTION */}
         <div className="space-y-8">
           <span className="inline-flex border border-black px-3 py-1 text-xs font-bold uppercase tracking-wide text-black">
@@ -16,8 +16,8 @@ export default function Home() {
             </h1>
 
             <p className="max-w-xl text-base leading-7 text-neutral-700">
-              Add your current AI stack, compare plans against team size, and
-              get simple recommendations with estimated savings.
+              Add your current AI Tool, compare plans and get simple
+              recommendations with estimated savings.
             </p>
           </div>
 
@@ -33,8 +33,8 @@ export default function Home() {
           {/* SMALL TRUST SECTION */}
           <div className="border-l-2 border-black pl-4">
             <p className="text-sm text-neutral-700">
-              Designed for small teams using ChatGPT, Claude, Cursor, Copilot,
-              and other AI subscriptions.
+              For teams using ChatGPT, Claude, Cursor, Copilot, and other AI
+              subscriptions.
             </p>
           </div>
         </div>
@@ -89,7 +89,7 @@ export default function Home() {
 
               <div className="mt-5 border-t border-neutral-200 pt-4">
                 <p className="text-sm font-semibold">
-                  Estimated savings: ~$32/month
+                  Estimated savings: $32/month
                 </p>
               </div>
             </div>

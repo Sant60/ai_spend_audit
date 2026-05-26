@@ -115,28 +115,24 @@ const SpendForm = () => {
   }
 
   return (
-    <div className="shadow inset-shadow-sm inset-shadow-black bg-white p-6 sm:p-8">
+    <div className="shadow  inset-shadow-sm inset-shadow-black rounded-[20] bg-white p-6 sm:p-8">
       <div className="mb-8 space-y-2">
-        <h2 className="text-2xl font-bold text-black">
+        <h2 className="text-2xl font-bold text-black text-center ">
           Enter your current setup
         </h2>
-        <p className="text-sm leading-6 text-black">
-          One tool is enough. We&apos;ll flag overpriced plans, extra seats, and
-          easy savings.
-        </p>
       </div>
 
       <form className="grid gap-5" onSubmit={handleSubmit}>
         <ToolSelector value={formData.toolId} onChange={handleToolChange} />
 
-        <label className="flex flex-col gap-2">
+        <label className="flex flex-col gap-2 ">
           <span className="text-sm font-bold text-black">Current plan</span>
           <select
             value={formData.currentPlanId}
             onChange={(event) =>
               updateField("currentPlanId", event.target.value)
             }
-            className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+            className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border  border-black  rounded-[5] bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
           >
             {selectedTool.plans.map((plan) => (
               <option key={plan.id} value={plan.id}>
@@ -156,7 +152,7 @@ const SpendForm = () => {
               onChange={(event) =>
                 updateField("monthlySpend", Number(event.target.value))
               }
-              className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+              className=" shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
             />
           </label>
 
@@ -169,7 +165,7 @@ const SpendForm = () => {
               onChange={(event) =>
                 updateField("seats", Number(event.target.value))
               }
-              className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+              className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
             />
           </label>
         </div>
@@ -184,7 +180,7 @@ const SpendForm = () => {
               onChange={(event) =>
                 updateField("teamSize", Number(event.target.value))
               }
-              className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+              className=" shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
             />
           </label>
 
@@ -198,7 +194,7 @@ const SpendForm = () => {
                   event.target.value as AuditFormInput["useCase"],
                 )
               }
-              className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+              className=" shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
             >
               {USE_CASE_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>

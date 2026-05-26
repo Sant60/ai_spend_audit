@@ -3,7 +3,12 @@ import { saveLead } from "@/lib/db/supabase";
 import type { LeadInput } from "@/types/lead";
 
 function validateLead(input: LeadInput) {
-  return input.auditId && input.name.trim() && input.email.trim() && input.company.trim();
+  return (
+    input.auditId &&
+    input.name.trim() &&
+    input.email.trim() &&
+    input.company.trim()
+  );
 }
 
 export async function POST(request: Request) {

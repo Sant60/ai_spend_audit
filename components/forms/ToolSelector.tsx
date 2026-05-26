@@ -12,7 +12,7 @@ const ToolSelector = ({ value, onChange }: ToolSelectorProps) => {
       <select
         value={value}
         onChange={(event) => onChange(event.target.value)}
-        className="border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+        className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
       >
         {TOOL_OPTIONS.map((tool) => (
           <option key={tool.id} value={tool.id}>
