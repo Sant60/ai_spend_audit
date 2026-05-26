@@ -63,6 +63,7 @@ npm run lint
 ### audits
 
 Stores details about each audit, such as:
+
 - tool name
 - current plan
 - monthly spend
@@ -74,6 +75,7 @@ Stores details about each audit, such as:
 ### leads
 
 Captures information from users interested in the service, including:
+
 - audit ID
 - name
 - email
@@ -90,21 +92,24 @@ Captures information from users interested in the service, including:
 ## Screenshots
 
 ## Landing page
+
 <img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/9dea971c-c690-4323-867c-3b1f410d8134" />
 
 ## Audit form
+
 <img width="1971" height="1139" alt="image" src="https://github.com/user-attachments/assets/016a73ba-4e76-4921-b599-04ebce3b852d" />
 
 ## Audit results page
+
   <img width="1971" height="1772" alt="image" src="https://github.com/user-attachments/assets/ad1feff9-a7cf-4cd3-b4df-08420acb4a40" />
 
 ## Recommendation section
+
   <img width="993" height="380" alt="image" src="https://github.com/user-attachments/assets/666b106f-0618-4419-af03-1b55fc9b21fc" />
 
 ## Lead capture process
+
 <img width="635" height="555" alt="image" src="https://github.com/user-attachments/assets/68703fab-ca96-4d91-a317-16dc6a82a65a" />
-
-
 
 ## Related Documentation
 
