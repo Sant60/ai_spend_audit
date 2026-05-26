@@ -1,6 +1,6 @@
 # AI Spend Audit
 
-This web application, developed as part of the Credex internship, aims to tackle the common issue of teams overspending on AI tools. Many organizations subscribe to multiple AI services monthly without a clear understanding of whether they're on the most cost-effective plans or if their current subscriptions align with their actual needs.
+This web application, developed as part of the Credex internship assignment, aims to tackle the common issue of teams overspending on AI tools. Many organizations subscribe to multiple AI services monthly without a clear understanding of whether they're on the most cost-effective plans or if their current subscriptions align with their actual needs.
 
 The core functionality of the app allows users to input details about their AI tools, including their monthly expenses, the number of user seats, and the specific use cases. Based on this information, the application then generates a comprehensive audit report. This report not only highlights potential areas of overspending but also provides actionable recommendations for optimization and estimates the potential savings.
 
@@ -89,15 +89,54 @@ Captures information from users interested in the service, including:
 
 ## Screenshots
 
-- Landing page
-- Audit form
-- Audit results page
-- Recommendation section
-- Lead capture process
+## Landing page
+<img width="1000" height="600" alt="image" src="https://github.com/user-attachments/assets/9dea971c-c690-4323-867c-3b1f410d8134" />
+
+## Audit form
+<img width="1971" height="1139" alt="image" src="https://github.com/user-attachments/assets/016a73ba-4e76-4921-b599-04ebce3b852d" />
+
+## Audit results page
+  <img width="1971" height="1772" alt="image" src="https://github.com/user-attachments/assets/ad1feff9-a7cf-4cd3-b4df-08420acb4a40" />
+
+## Recommendation section
+  <img width="993" height="380" alt="image" src="https://github.com/user-attachments/assets/666b106f-0618-4419-af03-1b55fc9b21fc" />
+
+## Lead capture process
+<img width="635" height="555" alt="image" src="https://github.com/user-attachments/assets/68703fab-ca96-4d91-a317-16dc6a82a65a" />
+
+
 
 ## Related Documentation
 
+### Core Project Docs
+
+- [README.md](./README.md)
 - [ARCHITECTURE.md](./ARCHITECTURE.md)
-- [DEVLOG.md](./DEVLOG.md)
 - [REFLECTION.md](./REFLECTION.md)
+- [DEVLOG.md](./DEVLOG.md)
 - [TESTS.md](./TESTS.md)
+
+### Product & Planning
+
+- [PRICING_DATA.md](./PRICING_DATA.md)
+- [ECONOMICS.md](./ECONOMICS.md)
+- [METRICS.md](./METRICS.md)
+- [GTM.md](./GTM.md)
+- [LANDING_COPY.md](./LANDING_COPY.md)
+- [USER_INTERVIEWS.md](./USER_INTERVIEWS.md)
+
+### Development Notes
+
+- [PROMPTS.md](./PROMPTS.md)
+- [AGENTS.md](./AGENTS.md)
+- [CLAUDE.md](./CLAUDE.md)
+
+### Main Folders
+
+- `app/` — App Router pages and API routes
+- `components/` — Reusable UI components
+- `constants/` — Static pricing and tool data
+- `lib/` — Core business logic and utilities
+- `types/` — Shared TypeScript types
+- `tests/` — Vitest test files
+- `public/` — Static assets
