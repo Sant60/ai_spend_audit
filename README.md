@@ -37,7 +37,18 @@ npm install
 NEXT_PUBLIC_SUPABASE_URL=your-supabase-url
 NEXT_PUBLIC_SUPABASE_ANON_KEY=your-supabase-anon-key
 SUPABASE_SERVICE_ROLE_KEY=your-supabase-service-role-key
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+
+# AI summary — at least one required; tried in order: Gemini → Anthropic → OpenAI
+# Gemini is free at aistudio.google.com (recommended)
+GEMINI_API_KEY=your-gemini-api-key
+# Anthropic (optional fallback) — console.anthropic.com
 ANTHROPIC_API_KEY=your-anthropic-api-key
+# OpenAI (optional fallback) — platform.openai.com
+OPENAI_API_KEY=your-openai-api-key
+
+# Email notifications (optional) — resend.com free tier
+RESEND_API_KEY=your-resend-api-key
 ```
 
 ### 3. Start the development server

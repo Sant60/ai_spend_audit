@@ -26,6 +26,7 @@ const SpendForm = () => {
   const [formData, setFormData] = useState<AuditFormInput>(() => {
     return loadAuditDraft() ?? defaultFormState;
   });
+  const [honeypot, setHoneypot] = useState(""); // bot trap
   const [error, setError] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -51,21 +52,24 @@ const SpendForm = () => {
     const tool = TOOL_OPTIONS.find((item) => item.id === toolId);
     updateField("toolId", toolId);
     updateField("currentPlanId", tool?.plans[0]?.id ?? "");
+    // Set default monthly spend from plan price
+    const firstPlan = tool?.plans[0];
+    if (firstPlan && firstPlan.monthlyPrice > 0) {
+      updateField("monthlySpend", firstPlan.monthlyPrice * formData.seats);
+    }
   }
 
   function validateForm() {
     if (!formData.toolId || !formData.currentPlanId || !formData.useCase) {
       return "Fill out every field.";
     }
-
     if (
-      formData.monthlySpend <= 0 ||
+      formData.monthlySpend < 0 ||
       formData.seats <= 0 ||
       formData.teamSize <= 0
     ) {
       return "Enter valid numbers for spend, seats, and team size.";
     }
-
     return "";
   }
 
@@ -73,7 +77,6 @@ const SpendForm = () => {
     event.preventDefault();
 
     const validationError = validateForm();
-
     if (validationError) {
       setError(validationError);
       return;
@@ -85,10 +88,8 @@ const SpendForm = () => {
     try {
       const response = await fetch("/api/audits", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ ...formData, _hp: honeypot }),
       });
 
       const data = (await response.json()) as {
@@ -114,45 +115,82 @@ const SpendForm = () => {
     }
   }
 
+  const selectedPlan = selectedTool.plans.find(
+    (p) => p.id === formData.currentPlanId,
+  );
+
   return (
-    <div className="shadow  inset-shadow-sm inset-shadow-black rounded-[20] bg-white p-6 sm:p-8">
+    <div className="shadow inset-shadow-sm inset-shadow-black rounded-[20] bg-white p-6 sm:p-8">
       <div className="mb-8 space-y-2">
-        <h2 className="text-2xl font-bold text-black text-center ">
+        <h2 className="text-center text-2xl font-bold text-black">
           Enter your current setup
         </h2>
+        <p className="text-center text-sm text-neutral-500">
+          Takes 60 seconds. No login required.
+        </p>
       </div>
 
       <form className="grid gap-5" onSubmit={handleSubmit}>
+        {/* Honeypot — hidden from real users, bots fill it */}
+        <input
+          type="text"
+          value={honeypot}
+          onChange={(e) => setHoneypot(e.target.value)}
+          tabIndex={-1}
+          autoComplete="off"
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            opacity: 0,
+            pointerEvents: "none",
+            height: 0,
+            width: 0,
+            overflow: "hidden",
+          }}
+        />
+
         <ToolSelector value={formData.toolId} onChange={handleToolChange} />
 
-        <label className="flex flex-col gap-2 ">
+        <label className="flex flex-col gap-2">
           <span className="text-sm font-bold text-black">Current plan</span>
           <select
             value={formData.currentPlanId}
             onChange={(event) =>
               updateField("currentPlanId", event.target.value)
             }
-            className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border  border-black  rounded-[5] bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+            className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
           >
             {selectedTool.plans.map((plan) => (
               <option key={plan.id} value={plan.id}>
-                {plan.name} (${plan.monthlyPrice}/seat)
+                {plan.name}
+                {plan.monthlyPrice > 0
+                  ? ` ($${plan.monthlyPrice}/seat)`
+                  : " (Free)"}
               </option>
             ))}
           </select>
         </label>
 
+        {selectedPlan && selectedPlan.id === "payg" && (
+          <p className="rounded border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-800">
+            API/pay-as-you-go plans are usage-based. Enter your average monthly
+            bill below.
+          </p>
+        )}
+
         <div className="grid gap-5 sm:grid-cols-2">
           <label className="flex flex-col gap-2">
-            <span className="text-sm font-bold text-black">Monthly spend</span>
+            <span className="text-sm font-bold text-black">
+              Monthly spend ($)
+            </span>
             <input
               type="number"
-              min="1"
+              min="0"
               value={formData.monthlySpend}
               onChange={(event) =>
                 updateField("monthlySpend", Number(event.target.value))
               }
-              className=" shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+              className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
             />
           </label>
 
@@ -180,7 +218,7 @@ const SpendForm = () => {
               onChange={(event) =>
                 updateField("teamSize", Number(event.target.value))
               }
-              className=" shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+              className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
             />
           </label>
 
@@ -194,7 +232,7 @@ const SpendForm = () => {
                   event.target.value as AuditFormInput["useCase"],
                 )
               }
-              className=" shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
+              className="shadow inset-shadow-sm inset-shadow-black rounded-[5] border border-black bg-white px-4 py-3 text-sm text-black outline-none focus:border-[#112a5c]"
             >
               {USE_CASE_OPTIONS.map((option) => (
                 <option key={option.value} value={option.value}>
@@ -206,7 +244,7 @@ const SpendForm = () => {
         </div>
 
         {error ? (
-          <p className="border border-black bg-white px-4 py-3 text-sm font-bold text-black">
+          <p className="border border-red-500 bg-red-50 px-4 py-3 text-sm font-bold text-red-700">
             {error}
           </p>
         ) : null}
@@ -214,10 +252,14 @@ const SpendForm = () => {
         <button
           type="submit"
           disabled={isSubmitting}
-          className="mt-2 inline-flex items-center justify-center border border-black bg-[#112a5c] px-5 py-3 text-sm font-bold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:bg-[#112a5c]"
+          className="mt-2 inline-flex items-center justify-center border border-black bg-[#112a5c] px-5 py-3 text-sm font-bold text-white transition hover:bg-black disabled:cursor-not-allowed disabled:opacity-60"
         >
-          {isSubmitting ? "Building report..." : "Generate Report"}
+          {isSubmitting ? "Building report..." : "Generate Audit Report →"}
         </button>
+
+        <p className="text-center text-xs text-neutral-400">
+          Free. No login required. Your data isn&apos;t sold.
+        </p>
       </form>
     </div>
   );

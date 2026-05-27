@@ -1,8 +1,9 @@
 export type UseCase =
   | "coding"
   | "writing"
+  | "data"
   | "research"
-  | "support"
+  | "mixed"
   | "general";
 
 export type PlanKind = "individual" | "team" | "enterprise";
